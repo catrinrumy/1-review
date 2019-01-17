@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  min-width: 350px;
+}
+
+.main-header {
+  background-color: #24006c;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-menu {
+  display: flex;
+  /* У меня на флекс-врап есть некоторый стоп. В некоторых старых браузерах он не работает. zНо сейчас всё ок. Побробнее тут: https://caniuse.com/#feat=flexbox */
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  justify-content: flex-start;
+  list-style-type: none;
+}
+
+/* Старайся избегать каскада. Часто увлекаешься, и код превращается в ад. Но маленький каскад - можно */
+.main-header a {
+  display: block;
+  margin: 0px;
+  padding: 5px 15px;
+  color: white;
+  text-decoration: none;
+  /* sans-serif. Не забывай указать фоллбечные шрифты из стандартного набора. Вот тут подробнее https://developer.mozilla.org/ru/docs/Web/CSS/font-family */
+  font-family: Ubuntu, san-serif;
+  font-size: 1em;
+}
+
+.svg {
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.stairs {
+  transform: rotate(180deg);
+}
+
+.header-end {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.menu-submenu {
+  position: relative;
+}
+
+.menu-submenu::before {
+  display: block;
+  width: 0px;
+  content: "";
+  position: absolute;
+  top: 23px;
+  right: -11px;
+  /* У тебя треугольник выпадает из области блока, и при наведении на него он не нажимается. Добавль справа паддинг, и поставь туда треугольник */
+  border: 7px solid #8d7fa4;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.submenu {
+  padding: 0;
+  position: absolute;
+  list-style-type: none;
+  background-color: #000;
+  display: none;
+}
+
+.menu-submenu:hover .submenu {
+  display: block;
+}
+
+.menu-item:hover,
+.user a:hover,
+.exit a:hover {
+  color: #8d7fa4;
+  /* Ховеры лучше расположить рядом с блоком. Оптимизацией будет заниматься система сборки. */
+}
+
+.submenu-item {
+  /* Блоком лучше делать ссылку, а не элемент списка. Список служит только разметкой. */
+  display: block;
+
+  /* ЛУчше сбросить лист-стайл у родителя */
+  list-style-type: none;
+  background-color: #2c195d;
+  margin: 0;
+  padding: 10px;
+  width: 230px;
+}
+
+.submenu-item:hover a {
+  color: #8d7fa4;
+}
+
+@media screen and (max-width: 750px) {
+  /* Сейчас можно писать только @media (max-width: 750px){} */
+  a.menu-item {
+    font-size: 0px;
+  }
+
+  a.menu-item:hover .svg {
+    opacity: 0.7;
+  }
+}
